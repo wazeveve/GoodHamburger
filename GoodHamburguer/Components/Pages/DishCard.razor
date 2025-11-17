@@ -1,0 +1,49 @@
+﻿@using GoodHamburguer.Models; 
+
+<div class="col-12 col-md-6 text-center">
+    <div>
+        <h4>@Dish.Name</h4>
+    </div>
+    <div>
+        <img alt="@Dish.Name" src="@Dish.ImgUrl" style="width: 70%" />
+    </div>
+    <div>
+        <p> @Dish.Description </p>
+        <p> Price: $ @Dish.Price.ToString("N2")</p>
+    </div>
+    <div>
+        <button class="btn btn-primary" @onclick="AddToCart" title="Add to cart" aria-label="Add @Dish.Name to cart">
+            Add to cart
+        </button>
+    </div>
+</div>
+
+
+@code {
+    [Parameter, EditorRequired]
+    public Dish Dish { get; set; } = default!;
+
+    [Parameter]
+    public EventCallback<Dish> OnAddToCart { get; set; }
+
+    private bool _isAdding;
+
+    private async Task AddToCart()
+    {
+        if (_isAdding)
+            return;
+
+        try
+        {
+            _isAdding = true;
+            if (OnAddToCart.HasDelegate)
+            {
+                await OnAddToCart.InvokeAsync(Dish);
+            }
+        }
+        finally
+        {
+            _isAdding = false;
+        }
+    }
+}
