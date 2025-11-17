@@ -10,5 +10,7 @@ namespace GoodHamburguer.Models
         public decimal Price { get; set; }
 
         public DishType Type { get; set; }
+
+        public List<OrderDish>? OrderDishes { get; set; }
     }
 }
