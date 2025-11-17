@@ -7,20 +7,24 @@ namespace GoodHamburguer.Data
     {
         public MenuContext(DbContextOptions<MenuContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<OrderDish>().HasKey(od => new { od.OrderId, od.DishId });
 
+            modelBuilder.Entity<OrderDish>()
+                .HasOne(od => od.Dish)
+                .WithMany(d => d.OrderDishes)
+                .HasForeignKey(od => od.DishId);
+
+            modelBuilder.Entity<OrderDish>()
+                .HasOne(od => od.Order)
+                .WithMany(o => o.OrderDishes)
+                .HasForeignKey(od => od.OrderId);
+
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<OrderDish>().HasOne(d => d.Dish).WithMany(od => od.OrderDishes).HasForeignKey(d => d.DishId);
-            modelBuilder.Entity<OrderDish>().HasOne(o => o.Order).WithMany(od => od.OrderDishes).HasForeignKey(o => o.Order);
-
         }
-
 
         public DbSet<Dish> Dishes { get; set; }
         public DbSet<Order> Orders { get; set; }
