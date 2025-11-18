@@ -1,0 +1,32 @@
+﻿@page "/sandwich"
+@using GoodHamburguer.Models
+@using System.Linq
+@using Microsoft.EntityFrameworkCore
+@inject GoodHamburguer.Data.MenuContext DB
+
+
+<h3> Sandiwches </h3>
+
+<div class="row">
+    @if (dishes == null)
+    {
+        <p> Dishes are Loading... </p>
+    }
+    else
+    {
+        @foreach (var item in dishes)
+        {
+            <DishCard Dish="item" />
+        }
+    }
+</div>
+
+
+@code {
+    private List<Dish>? dishes;
+
+    protected override async Task OnInitializedAsync()
+    {
+        dishes = await DB.Dishes.Where(d => EF.Property<int>(d, "Type") == 0).ToListAsync();
+    }
+}
