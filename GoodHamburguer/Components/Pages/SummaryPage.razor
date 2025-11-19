@@ -1,0 +1,43 @@
+﻿@page "/summary"
+@using GoodHamburguer.Models
+@inject IHttpClientFactory ClientFactory
+
+<h3>Order Summary</h3>
+
+@if (order == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div>
+        <h4>Order #@order.orderId</h4>
+        <p>Customer: @order.customer</p>
+
+        <table class="table">
+            <tbody>
+                @foreach (var item in order.items)
+                {
+                    <tr>
+                        <td>@item.name</td>
+                        <td>@item.qty</td>
+                        <td>$ @item.price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h3>Total: $ @order.total</h3>
+    </div>
+}
+
+@code {
+    private dynamic? order;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var client = ClientFactory.CreateClient("api");
+        order = await client.GetFromJsonAsync<OrderSummaryDTO>("api/Order/Summary");
+
+    }
+}

@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Api\Orders\Summary\" />
+    <Folder Include="Api\Order\Summary\" />
   </ItemGroup>
 
 </Project>
