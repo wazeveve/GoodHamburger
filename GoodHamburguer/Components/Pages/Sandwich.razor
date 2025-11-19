@@ -3,30 +3,50 @@
 @using System.Linq
 @using Microsoft.EntityFrameworkCore
 @inject GoodHamburguer.Data.MenuContext DB
+@inject OrderService OrderService
 
+<h3>Sandwiches</h3>
 
-<h3> Sandiwches </h3>
+@if (!string.IsNullOrEmpty(errorMessage))
+{
+    <div class="alert alert-danger">@errorMessage</div>
+}
 
 <div class="row">
     @if (dishes == null)
     {
-        <p> Dishes are Loading... </p>
+        <p>Dishes are Loading...</p>
     }
     else
     {
         @foreach (var item in dishes)
         {
-            <DishCard Dish="item" />
+            <DishCard Dish="item" OnAddToCart="AddToCart" />
         }
     }
 </div>
 
-
 @code {
     private List<Dish>? dishes;
+    private string? errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
-        dishes = await DB.Dishes.Where(d => EF.Property<int>(d, "Type") == 0).ToListAsync();
+        dishes = await DB.Dishes
+            .Where(d => EF.Property<int>(d, "Type") == 0)
+            .ToListAsync();
+    }
+
+    private void AddToCart(Dish dish)
+    {
+        try
+        {
+            OrderService.AddDish(dish); 
+            errorMessage = null;        
+        }
+        catch (Exception ex)
+        {
+            errorMessage = ex.Message; 
+        }
     }
 }

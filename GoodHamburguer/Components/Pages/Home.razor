@@ -2,6 +2,7 @@
 @using GoodHamburguer.Models
 @using Microsoft.EntityFrameworkCore
 @inject GoodHamburguer.Data.MenuContext DB
+@using GoodHamburguer.Shared
 
 <PageTitle>Home</PageTitle>
 
@@ -11,25 +12,52 @@
     <div class="row">
         @if (dishes == null)
         {
-            <p> Dishes are Loading... </p>
+            <p>Dishes are Loading...</p>
         }
         else
         {
             @foreach (var dish in dishes)
             {
-                <DishCard Dish="dish"></DishCard>
+                <DishCard Dish="dish" OnAddToCart="AddItemToCart" />
             }
         }
     </div>
 </div>
 
+<hr />
 
-@code{
+<h3>Carrinho</h3>
+<p>@message</p>
+
+@if (cartItems.Count == 0)
+{
+    <p>Nenhum item no carrinho ainda.</p>
+}
+else
+{
+    <ul>
+        @foreach (var item in cartItems)
+        {
+            <li>@item.Name — $ @item.Price.ToString("N2")</li>
+        }
+    </ul>
+}
+
+@code {
     private List<Dish>? dishes;
+    private List<Dish> cartItems = new();
+    private string message = "";
 
     protected override async Task OnInitializedAsync()
     {
         dishes = await DB.Dishes.ToListAsync();
     }
+
+    private void AddItemToCart(Dish dish)
+    {
+        cartItems.Add(dish);
+        message = "EVENT RECEIVED!";
+    }
+
 
 }

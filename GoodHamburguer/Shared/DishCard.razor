@@ -1,4 +1,6 @@
-﻿@using GoodHamburguer.Models; 
+﻿@using GoodHamburguer.Models;
+
+
 
 <div class="col-12 col-md-6 text-center">
     <div>
@@ -12,9 +14,10 @@
         <p> Price: $ @Dish.Price.ToString("N2")</p>
     </div>
     <div>
-        <button class="btn btn-primary" @onclick="AddToCart" title="Add to cart" aria-label="Add @Dish.Name to cart">
+        <button class="btn btn-primary" @onclick="AddToCart" title="Add to cart" aria-label="Add @Dish.Name to cart" >
             Add to cart
         </button>
+        <p>@debug</p>
     </div>
 </div>
 
@@ -26,24 +29,14 @@
     [Parameter]
     public EventCallback<Dish> OnAddToCart { get; set; }
 
-    private bool _isAdding;
+    private string debug = "";
 
     private async Task AddToCart()
     {
-        if (_isAdding)
-            return;
+        debug = "CLICKED!";
 
-        try
-        {
-            _isAdding = true;
-            if (OnAddToCart.HasDelegate)
-            {
-                await OnAddToCart.InvokeAsync(Dish);
-            }
-        }
-        finally
-        {
-            _isAdding = false;
-        }
+        if (OnAddToCart.HasDelegate)
+            await OnAddToCart.InvokeAsync(Dish);
     }
+
 }

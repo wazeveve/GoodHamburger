@@ -13,6 +13,9 @@ builder.Services.AddRazorComponents()
 builder.Services.AddDbContext<MenuContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
+builder.Services.AddScoped<OrderService>();
+
+
 
 var app = builder.Build();
 
