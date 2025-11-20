@@ -9,6 +9,8 @@ Although the Cart and Checkout logic wasn’t fully completed, the project
 served as a great way to practice Blazor and frontend
 structure.
 
+=> Sorry For the "Hamburguer" <=
+
 ------------------------------------------------------------------------
 
 🏠 Home Page Preview
