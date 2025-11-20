@@ -2,7 +2,9 @@
 @using GoodHamburguer.Models
 @inject IHttpClientFactory ClientFactory
 
-<h3>Order Summary</h3>
+<PageTitle>Checkout</PageTitle>
+
+<h3 class="text-center" style=" font-family: 'BiteChalk' ; font-size: 64px;">Order Summary</h3>
 
 @if (order == null)
 {
@@ -10,15 +12,15 @@
 }
 else
 {
-    <div>
-        <h4>Order #@order.orderId</h4>
-        <p>Customer: @order.customer</p>
+    <div class="text-center">
+        <h4 class="desc-text">Order #@order.orderId</h4>
+        <p class="desc-text">Customer: @order.customer</p>
 
-        <table class="table">
+        <table class="summary-table bg-red2">
             <tbody>
                 @foreach (var item in order.items)
                 {
-                    <tr>
+                    <tr class="bg-red2">
                         <td>@item.name</td>
                         <td>@item.qty</td>
                         <td>$ @item.price</td>
@@ -27,7 +29,7 @@ else
             </tbody>
         </table>
 
-        <h3>Total: $ @order.total</h3>
+        <h3 class="desc-text">Total: $ @order.total</h3>
     </div>
 }
 

@@ -1,15 +1,95 @@
-html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+@font-face {
+    font-family: 'BiteChalk';
+    src: url('/fonts/BURISC-Regular.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
-a, .btn-link {
-    color: #006bb7;
+@font-face {
+    font-family: 'Bungee';
+    src: url('/fonts/BungeeTint-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
+
+@font-face {
+    font-family: 'Almendra';
+    src: url('/fonts/Almendra-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Prompt';
+    src: url('/fonts/Prompt-LightItalic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html, body {
+    font-family: 'Sans Serif Collection', Helvetica, Arial, sans-serif;
+    color: white;
+}
+
+
+.summary-table {
+    width: 600px; 
+    margin: 20px auto;
+    border-radius: 15px;
+    overflow: hidden;
+    border-collapse: collapse;
+}
+
+    .summary-table td {
+        padding: 12px 16px;
+        font-family: 'Prompt', sans-serif;
+        color: white; 
+        border: none; 
+        font-size: 18px;
+    }
+
+
+    .summary-table tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
+    }
+
+        .summary-table tr:last-child {
+            border-bottom: none;
+        }
+
+.bg-red {
+    background-color: #542d07;
+}
+
+.bg-red2 {
+    background-color: #381e05;
+}
+
+
+a, .btn-link {
+    color: #58633d;
+}
+
+
+.desc-text {
+    font-family: 'Prompt', Helvetica;
+}
+
 
 .btn-primary {
     color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    background-color: #58633d;
+    border-color: #b2c97d;
+    transition: all 0.2s;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #4a582f;
+    border-color: #9cad63;
+    scale: 1.2;
+    transition: all 0.2s;
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {

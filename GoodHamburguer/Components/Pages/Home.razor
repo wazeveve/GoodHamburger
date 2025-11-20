@@ -6,8 +6,9 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1 class="container bg-gra"> Good Hamburguer </h1>
+<h1 class="container text-center" style="font-family: 'BiteChalk'; font-size: 100px;"> Good Hamburger </h1>
 
+<h2 class="container text-center" style="font-family: 'BiteChalk'; font-size: 35px"> MENU </h2>
 <div class="container">
     <div class="row">
         @if (dishes == null)
@@ -26,12 +27,12 @@
 
 <hr />
 
-<h3>Cart</h3>
-<p>@message</p>
+<h3 style="font-family: 'BiteChalk'; font-size: 30px">Cart</h3>
+<p >@message</p>
 
 @if (cartItems.Count == 0)
 {
-    <p>You haven't any items on cart yet!'</p>
+    <p style="font-family: 'Prompt'">You don't have any items in your cart yet!</p>
 }
 else
 {

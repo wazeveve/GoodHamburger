@@ -2,16 +2,16 @@
 
 
 
-<div class="col-12 col-md-6 text-center">
+<div class="col-12 col-md-6 text-center my-2">
     <div>
-        <h4>@Dish.Name</h4>
+        <h4 style="font-family: Almendra">@Dish.Name</h4>
     </div>
     <div>
-        <img alt="@Dish.Name" src="@Dish.ImgUrl" style="width: 70%" />
+        <img alt="@Dish.Name" src="@Dish.ImgUrl" style="width: 70%; border-radius: 15px" />
     </div>
     <div>
-        <p> @Dish.Description </p>
-        <p> Price: $ @Dish.Price.ToString("N2")</p>
+        <p class="desc-text"> @Dish.Description </p>
+        <p class="desc-text"> Price: $ @Dish.Price.ToString("N2")</p>
     </div>
     <div>
         <button class="btn btn-primary" @onclick="AddToCart" title="Add to cart" aria-label="Add @Dish.Name to cart" >

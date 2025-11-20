@@ -25,6 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Api\Order\Summary\" />
+    <Folder Include="wwwroot\fonts\" />
   </ItemGroup>
 
 </Project>
